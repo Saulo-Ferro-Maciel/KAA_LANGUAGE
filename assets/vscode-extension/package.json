@@ -1,0 +1,50 @@
+{
+  "name": "kaa-lang",
+  "displayName": "Kaa Language",
+  "description": "Official syntax highlighting and icon for the Kaa programming language",
+  "version": "5.0.4",
+  "publisher": "sauloferro",
+  "main": "./extension.js",
+  "activationEvents": [
+    "onLanguage:kaa"
+  ],
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "icon": "icon.png",
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "kaa",
+        "aliases": [
+          "Kaa",
+          "kaa"
+        ],
+        "extensions": [
+          ".kaa"
+        ],
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./icon.png",
+          "dark": "./icon.png"
+        }
+      }
+    ],
+    "grammars": [
+      {
+        "language": "kaa",
+        "scopeName": "source.kaa",
+        "path": "./syntaxes/kaa.tmLanguage.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "kaa",
+        "path": "./snippets/kaa.code-snippets"
+      }
+    ]
+  }
+}

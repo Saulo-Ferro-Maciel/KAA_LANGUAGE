@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+
+# C/Cython
+*.so
+vm.c
+build/
+
+# IDEs
+.vscode/
+.cursorrules
+.windsurfrules
+
+# MkDocs
+site/
+
+# Installer builds (unless specifically requested to be in git)
+installer/dist/
+installer/build/
+
+# Scratch/Temporary
+scratch/
+temp_node/
+input*.txt
+github_token.txt

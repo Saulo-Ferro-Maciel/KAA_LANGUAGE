@@ -1,0 +1,22 @@
+// Kaa Random Library
+
+add "time" -> timestamp;
+
+fun _rs(){} _rs.seed=timestamp()*10000; _rs.m=2147483647; _rs.a=16807; _rs.c=0;
+
+// Seed / Semente
+fun seed(s){_rs.seed=s;}
+
+// Next internal sequence / Proxima sequencia interna
+fun _next(){_rs.seed=(_rs.a*_rs.seed+_rs.c)%_rs.m; if(_rs.seed<=0){_rs.seed=_rs.seed+2147483646;} return _rs.seed;}
+
+// Random Float / Flutuante Aleatorio
+fun rand(){return _next()/_rs.m;}
+
+// Random Integer / Inteiro Aleatorio
+fun randint(min,max){if(min>max){var -i t=min; min=max; max=t;} return min+(_next()%((max-min)+1));}
+
+// Random Choice / Escolha Aleatoria
+fun choice(l){if(l.length==0){return nil;} var -l k=l.keys; if(k!=nil){return l[k[randint(0,k.length-1)]];} return l[randint(0,l.length-1)];}
+
+expor seed, rand, randint, choice;

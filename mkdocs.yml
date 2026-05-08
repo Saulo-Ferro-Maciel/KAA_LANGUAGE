@@ -1,0 +1,45 @@
+site_name: Enciclopédia Kaa
+site_description: A documentação oficial da linguagem Kaa
+site_author: Saulo Ferro Maciel
+
+theme:
+  name: material
+  palette:
+    # Usar tema dark por padrão
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: teal
+      accent: cyan
+      toggle:
+        icon: material/brightness-4
+        name: Trocar para claro
+    # Fallback/toggle para light
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: teal
+      accent: cyan
+      toggle:
+        icon: material/brightness-7
+        name: Trocar para escuro
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - search.highlight
+
+nav:
+  - Principal: index.md
+  - Download: download.md
+  - Guias Oficiais:
+    - Tipagem e Variáveis: guias/tipos_e_variaveis.md
+    - Sintaxe e Condicionais: guias/sintaxe_e_condicionais.md
+    - Coleções e Memória: guias/colecoes_e_memoria.md
+    - Poo e S-Bots: guias/poo_e_sbots.md
+    - Performance e JIT: guias/performance_e_jit.md
+    - Origem e Curiosidades: guias/origem_e_curiosidades.md
+    - Bibliotecas Padrões: guias/bibliotecas_padroes.md
+    - Exemplos de Código: guias/exemplos_de_codigo.md
+  - Histórico de Versões:
+    - Versão 4.6 (Antiga): v4.6_monolithic/Enciclopedia_Kaa_Antiga.md
+    - Versão 4.5: v4.5/docs/Enciclopedia_Kaa_v4.5.md
