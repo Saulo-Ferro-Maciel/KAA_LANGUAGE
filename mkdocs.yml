@@ -1,6 +1,7 @@
 site_name: Enciclopédia Kaa
 site_description: A documentação oficial da linguagem Kaa
 site_author: Saulo Ferro Maciel
+site_url: https://saulo-ferro-maciel.github.io/KAA_LANGUAGE/
 
 theme:
   name: material
