@@ -59,7 +59,8 @@
       subMaxLevel: 3,
       auto2top: true,
       homepage: 'index.md',
-      basePath: 'docs/', // Define que os arquivos estão na pasta docs/
+      basePath: 'docs/', 
+      nameLink: '#/', // Faz o nome do projeto voltar para a Home
       
       // Configurações de busca
       search: {
@@ -70,7 +71,11 @@
         depth: 6
       },
       
-      // Customização de cores e texto
+      // Alias para garantir que links com ou sem .md funcionem
+      alias: {
+        '/.*/_sidebar.md': '/_sidebar.md'
+      },
+      
       themeColor: '#008080'
     }
   </script>

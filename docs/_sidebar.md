@@ -1,7 +1,8 @@
-- [Principal](index.md)
-- [Download](download.md)
+- [🏠 Início](index.md)
+- [📥 Download](download.md)
+- [📜 Regras do Projeto](rules.md)
 
-- **Guias Oficiais**
+- **📖 Guias Oficiais**
   - [Tipagem e Variáveis](guias/tipos_e_variaveis.md)
   - [Sintaxe e Condicionais](guias/sintaxe_e_condicionais.md)
   - [Coleções e Memória](guias/colecoes_e_memoria.md)
@@ -11,8 +12,8 @@
   - [Bibliotecas Padrões](guias/bibliotecas_padroes.md)
   - [Exemplos de Código](guias/exemplos_de_codigo.md)
 
-- **Histórico de Versões**
+- **⏳ Histórico de Versões**
+  - [Versão 4.8](v4.8/index.md)
+  - [Versão 4.7](v4.7/index.md)
   - [Versão 4.6 (Antiga)](v4.6_monolithic/Enciclopedia_Kaa_Antiga.md)
   - [Versão 4.5](v4.5/docs/Enciclopedia_Kaa_v4.5.md)
-
-- [Regras do Projeto](rules.md)

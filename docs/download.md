@@ -1,4 +1,4 @@
-[⬅️ Voltar para a Enciclopédia](./index.md)
+[⬅️ Início](index.md)
 <br>
 
 # Download e Instalação
@@ -9,7 +9,7 @@ A linguagem Kaa é distribuída como um pacote auto-contido para Linux (x86_64),
 
 | Componente | Link de Download | Plataforma |
 | :--- | :--- | :--- |
-| **Kaa Installer** | [kaa-installer-linux-x86_64.tar.gz](./downloads/kaa-installer-linux-x86_64.tar.gz) | Linux x86_64 |
+| **Kaa Installer** | [kaa-installer-linux-x86_64.tar.gz](downloads/kaa-installer-linux-x86_64.tar.gz) | Linux x86_64 |
 
 ---
 
@@ -42,10 +42,10 @@ Siga os passos abaixo para instalar a Kaa no seu sistema Linux:
 
 Para uma melhor experiência de desenvolvimento, recomendamos instalar a nossa extensão oficial que oferece realce de sintaxe e auto-complete inteligente.
 
-* **Baixar VSIX:** [Kaa VS Code Extension](./downloads/kaa-extension.vsix)
+* **Baixar VSIX:** [Kaa VS Code Extension](downloads/kaa-extension.vsix)
 * **Como instalar:** No VS Code, vá em `Extensions` > `...` > `Install from VSIX`.
 
 ---
 
 ## 🚀 Próximos Passos
-Agora que você tem a Kaa instalada, que tal começar pelo [Guia de Tipagem e Variáveis](./guias/tipos_e_variaveis.md)?
+Agora que você tem a Kaa instalada, que tal começar pelo [Guia de Tipagem e Variáveis](guias/tipos_e_variaveis.md)?
