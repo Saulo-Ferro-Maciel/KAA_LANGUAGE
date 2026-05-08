@@ -10,7 +10,6 @@ A linguagem Kaa é distribuída como um pacote auto-contido para Linux (x86_64),
 | Componente | Link de Download | Plataforma |
 | :--- | :--- | :--- |
 | **Kaa Installer** | [kaa-installer-linux-x86_64.tar.gz](./downloads/kaa-installer-linux-x86_64.tar.gz) | Linux x86_64 |
-| **Project Source** | [kaa_project.zip](../kaa_project.zip) | All Platforms (Zip) |
 
 ---
 

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
-  <mime-type type="text/x-kaa">
-    <comment>Kaa Source Code</comment>
-    <comment xml:lang="pt_BR">Código-fonte Kaa</comment>
-    <glob pattern="*.kaa"/>
-    <icon name="text-x-kaa"/>
-  </mime-type>
-</mime-info>
