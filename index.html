@@ -746,32 +746,175 @@
       backdrop-filter: blur(2px);
     }
 
-    /* ===================== RESPONSIVE ===================== */
-    @media (max-width: 1200px) {
-      #toc { display: none; }
+    /* ===================== RESPONSIVE — MOBILE FIRST ===================== */
+
+    /* --- BASE (mobile, < 480px) --- */
+    :root {
+      --sidebar-w: 300px;
     }
 
-    @media (max-width: 768px) {
-      #sidebar {
-        transform: translateX(-100%);
-      }
+    /* Sidebar oculta por padrão no mobile */
+    #sidebar {
+      transform: translateX(-100%);
+    }
 
-      #sidebar.open {
-        transform: translateX(0);
-        box-shadow: var(--shadow);
-      }
+    #sidebar.open {
+      transform: translateX(0);
+      box-shadow: var(--shadow);
+    }
 
-      #overlay.open { display: block; }
+    #overlay.open { display: block; }
 
-      #topbar { left: 0; }
-      #main { margin-left: 0; }
-      #menu-btn { display: flex; }
+    /* Topbar cobre toda a largura no mobile */
+    #topbar { left: 0; }
+    #main { margin-left: 0; }
+    #menu-btn { display: flex; }
 
-      #content { padding: 32px 20px 60px; }
+    /* TOC oculta no mobile */
+    #toc { display: none; }
 
-      .hero h1 { font-size: 2rem; }
+    /* Conteúdo — padding mínimo no mobile */
+    #content { padding: 24px 16px 64px; }
 
-      .card-grid { grid-template-columns: 1fr; }
+    /* Tipografia adaptada para mobile */
+    h1 { font-size: 1.75rem; margin-bottom: 16px; }
+    h2 { font-size: 1.2rem; margin: 28px 0 12px; }
+    h3 { font-size: 1rem; margin: 20px 0 10px; }
+
+    .hero { padding: 28px 0 24px; }
+    .hero h1 { font-size: 1.9rem; }
+    .hero-logo { width: 90px; height: 90px; margin-bottom: 18px; }
+    .hero-tagline { font-size: 0.82rem; }
+    .hero-desc { font-size: 0.88rem; }
+
+    /* Cards — coluna única no mobile */
+    .card-grid { grid-template-columns: 1fr; gap: 12px; }
+
+    /* Tabelas: scroll horizontal */
+    .table-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 16px -4px;
+      border-radius: var(--radius);
+    }
+    table { min-width: 480px; font-size: 0.82rem; }
+    th { padding: 10px 12px; font-size: 0.7rem; }
+    td { padding: 9px 12px; }
+
+    /* Code blocks: scroll horizontal + tamanho menor */
+    pre {
+      padding: 14px 16px;
+      font-size: 0.78rem;
+      margin: 14px 0;
+      border-radius: 8px;
+    }
+    pre code { font-size: 0.78rem; line-height: 1.55; }
+
+    /* Callouts: layout compacto */
+    .callout { padding: 12px 14px; gap: 10px; }
+    .callout-body { font-size: 0.85rem; }
+
+    /* Download cards: empilhados */
+    .dl-card {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 18px;
+      gap: 12px;
+    }
+    .dl-btn { width: 100%; justify-content: center; }
+
+    /* Page-nav: empilhado no mobile */
+    .page-nav { flex-direction: column; gap: 10px; margin-top: 40px; }
+    .page-nav a { min-width: unset; }
+    .page-nav a.next { text-align: left; }
+
+    /* Version items */
+    .version-item { flex-wrap: wrap; gap: 8px; }
+
+    /* Steps */
+    .steps li { padding-left: 44px; }
+
+    /* Breadcrumb: truncar texto longo */
+    #breadcrumb { font-size: 0.72rem; max-width: calc(100vw - 160px); overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+
+    /* Topbar padding reduzido */
+    #topbar { padding: 0 16px; }
+
+    /* Theme toggle: esconder label no mobile */
+    #theme-label { display: none; }
+
+    /* --- SMALL (≥ 480px) --- */
+    @media (min-width: 480px) {
+      #content { padding: 28px 24px 72px; }
+
+      h1 { font-size: 2rem; }
+      .hero h1 { font-size: 2.2rem; }
+      .hero-logo { width: 110px; height: 110px; }
+
+      table { min-width: unset; font-size: 0.86rem; }
+      th { padding: 11px 14px; }
+      td { padding: 10px 14px; }
+
+      pre { padding: 16px 20px; }
+      pre code { font-size: 0.83rem; }
+
+      #theme-label { display: inline; }
+    }
+
+    /* --- TABLET (≥ 768px) --- */
+    @media (min-width: 768px) {
+      #content { padding: 40px 32px 80px; }
+
+      h1 { font-size: 2.2rem; }
+      h2 { font-size: 1.4rem; }
+      .hero h1 { font-size: 2.6rem; }
+      .hero-logo { width: 120px; height: 120px; }
+
+      .card-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+
+      table { min-width: unset; font-size: 0.9rem; }
+      th { padding: 12px 16px; }
+      td { padding: 11px 16px; }
+
+      pre { padding: 18px 22px; }
+      pre code { font-size: 0.86rem; }
+
+      .dl-card { flex-direction: row; align-items: center; }
+      .dl-btn { width: auto; }
+
+      .page-nav { flex-direction: row; }
+      .page-nav a.next { text-align: right; }
+
+      #topbar { padding: 0 24px; }
+
+      #breadcrumb { font-size: 0.8rem; max-width: unset; }
+    }
+
+    /* --- DESKTOP (≥ 1024px) — sidebar aparece fixa --- */
+    @media (min-width: 1024px) {
+      #sidebar { transform: translateX(0); }
+      #topbar { left: var(--sidebar-w); }
+      #main { margin-left: var(--sidebar-w); }
+      #menu-btn { display: none; }
+      #overlay { display: none !important; }
+
+      #content { padding: 48px 40px 80px; }
+      h1 { font-size: 2.4rem; }
+      h2 { font-size: 1.5rem; }
+      .hero h1 { font-size: 3rem; }
+      .hero-logo { width: 130px; height: 130px; }
+
+      .card-grid { grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+
+      table { min-width: unset; font-size: 0.9rem; }
+      pre { padding: 20px 24px; }
+      pre code { font-size: 0.88rem; }
+    }
+
+    /* --- WIDE DESKTOP (≥ 1200px) — TOC aparece --- */
+    @media (min-width: 1200px) {
+      #toc { display: block; }
+      #topbar { padding: 0 32px; }
     }
 
     /* Scrollbar global */
@@ -1510,7 +1653,7 @@ function render() {
   });
 
   // Close sidebar on mobile
-  if (window.innerWidth <= 768) {
+  if (window.innerWidth < 1024) {
     document.getElementById('sidebar').classList.remove('open');
     document.getElementById('overlay').classList.remove('open');
   }
