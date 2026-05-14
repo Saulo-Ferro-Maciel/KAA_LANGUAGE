@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Enciclopédia Kaa v5.0.1</title>
+  <title>Enciclopédia Kaa v5.2</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,400;0,500;1,400&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
 
@@ -967,7 +967,7 @@
            style="display:none;background:#192818;align-items:center;justify-content:center;font-size:1.4rem;font-weight:800;font-family:'Syne',sans-serif;color:#ffe135;border:2px solid #ffe135;">K</div>
       <div class="sidebar-brand">
         <div class="sidebar-brand-name">Enciclopédia Kaa</div>
-        <div class="sidebar-brand-ver">v5.0.1 — stable</div>
+        <div class="sidebar-brand-ver">v5.2 — stable</div>
       </div>
     </div>
 
@@ -990,6 +990,7 @@
       <a href="#/guia/exemplos" data-route="exemplos"><span class="nav-icon">💻</span>Exemplos de Código</a>
 
       <div class="nav-section-label">⏳ Histórico de Versões</div>
+      <a href="#/versao/v51" data-route="v51"><span class="nav-icon">📋</span>Versão 5.1</a>
       <a href="#/versao/v48" data-route="v48"><span class="nav-icon">📋</span>Versão 4.8</a>
       <a href="#/versao/v47" data-route="v47"><span class="nav-icon">📋</span>Versão 4.7</a>
       <a href="#/versao/v46" data-route="v46"><span class="nav-icon">📜</span>Versão 4.6 (Antiga)</a>
@@ -1031,7 +1032,7 @@ home: {
     <div class="hero">
       <img src="${logo64}" class="hero-logo" alt="Kaa"
            onerror="this.src='';this.style.background='#192818';this.style.display='flex';this.style.alignItems='center';this.style.justifyContent='center';this.style.fontSize='3rem';this.textContent='🐸'" />
-      <div class="version-banner"><span class="dot"></span> v5.0.1 — stable</div>
+      <div class="version-banner"><span class="dot"></span> v5.2 — stable</div>
       <h1>Enciclopédia Kaa</h1>
       <div class="hero-tagline"><em>Simples.</em> Tipada. <em>Poderosa.</em> C-Bound JIT.</div>
       <p class="hero-desc">
@@ -1061,6 +1062,7 @@ home: {
 
     <h2>📜 Histórico de Versões</h2>
     <div class="version-list">
+      <a class="version-item" href="#/versao/v51"><span class="version-badge">Versão 5.1</span><div class="version-info">Otimizações na VM, sistema modular e conversão implícita (_coerce_num)</div><span style="color:var(--text-muted)">→</span></a>
       <a class="version-item" href="#/versao/v48"><span class="version-badge">Versão 4.8</span><div class="version-info">Métodos de formatação de string embutidos no C-Bound</div><span style="color:var(--text-muted)">→</span></a>
       <a class="version-item" href="#/versao/v47"><span class="version-badge">Versão 4.7</span><div class="version-info">Introdução do Strict Scope e método .is_num</div><span style="color:var(--text-muted)">→</span></a>
       <a class="version-item" href="#/versao/v46"><span class="version-badge">Versão 4.6 (Monolítica Antiga)</span><div class="version-info">Primeira VM Cython — formato de documentação legado</div><span style="color:var(--text-muted)">→</span></a>
@@ -1078,7 +1080,7 @@ download: {
     <h1>Download e Instalação</h1>
     <p>A linguagem Kaa é distribuída como um pacote auto-contido para <strong>Linux (x86_64)</strong>, incluindo um ambiente Python portátil otimizado para a VM Cython.</p>
 
-    <div class="version-banner"><span class="dot"></span> Versão Atual: v5.0.1 (Stable)</div>
+    <div class="version-banner"><span class="dot"></span> Versão Atual: v5.2 (Stable)</div>
 
     <div class="dl-card">
       <div class="dl-icon">📦</div>
@@ -1169,7 +1171,7 @@ tipos: {
         <tr><td><code>.capitalize_phrase</code></td>    <td>Iniciais de todas as palavras em maiúsculo</td><td><code>"olá mundo" → "Olá Mundo"</code></td></tr>
         <tr><td><code>.upper_letters</code></td>        <td>Toda a string em maiúsculas</td>             <td><code>"kaa" → "KAA"</code></td></tr>
         <tr><td><code>.lower_letters</code></td>        <td>Toda a string em minúsculas</td>             <td><code>"KAA" → "kaa"</code></td></tr>
-        <tr><td><code>.replace_elements(a, b)</code></td><td>Substitui ocorrências de a por b</td>       <td>Sem args: remove espaços</td></tr>
+        <tr><td><code>.replace_elements(a, b)</code></td><td>Substitui ocorrências de a por b</td>       <td>Sem args: remove espaços. Suporta qualquer tipo na v5.2 (converte para string)</td></tr>
       </tbody>
     </table>
     </div>
@@ -1230,6 +1232,9 @@ colecoes: {
 
     <h3><code>.values</code></h3>
     <p>Semelhante ao <code>.keys</code>, extrai todos os valores do Dicionário e os devolve em uma Lista (<code>-l</code>), permitindo iteração direta em alta velocidade.</p>
+
+    <h3><code>.convert_to_num</code></h3>
+    <p>Converte agressivamente o valor da variável atual em um número (inteiro ou flutuante) caso seja possível (ex: string "123" vira 123). Muito útil para converter strings puras capturadas de leitura antes de realizar cálculos matemáticos.</p>
 
     <h2>Limpeza Numérica</h2>
     <h3><code>.f_valuation(casas)</code></h3>
@@ -1442,7 +1447,46 @@ exemplos: {
     <p>Exibe como obter dados do usuário via <code>input</code>, checar com <code>.is_num</code>, modificar strings com <code>.lower_letters()</code> e cronometrar com a biblioteca <code>time</code>.</p>
     ${codeBlock('kaa', `add "time" -> count;\n\nvar -f minutes;\nvar -T control;\n\nfun exit(){\n    var -s sair;\n    print "";\n    while(sair!="s" and sair!="n"){ \n        input "Deseja sair? [s/n] " >> sair; \n        sair = sair.lower_letters(); \n    }\n    if(sair == "s"){ return -F; } else { return -T; }\n}\n\nwhile(control != -F){\n    while (minutes.is_num != -T) { input "Quantos minutos devo cronometrar? " >> minutes; }\n    if (0 <= minutes <= 60) { minutes = minutes * 60; }\n    \n    count(minutes.f_valuation); \n    minutes = nil;\n    control = exit();\n}`)}
 
-    ${pageNav('#/guia/libs', 'Bibliotecas Padrões', '#/versao/v48', 'Versão 4.8')}
+    ${pageNav('#/guia/libs', 'Bibliotecas Padrões', '#/versao/v51', 'Versão 5.1')}
+  `
+},
+
+/* ───── VERSÃO 5.1 ───── */
+v51: {
+  title: '📋 Versão 5.1',
+  bc: '/ Versões / v5.1',
+  render: () => `
+    <h1>Enciclopédia Kaa (v5.1)</h1>
+    <blockquote>Simples. Tipada. Poderosa. C-Bound JIT.</blockquote>
+    <p>Esta versão trouxe aprimoramentos no REPL e coerção implícita nativa.</p>
+
+    <h2>Novidades da v5.1</h2>
+    <ul>
+      <li>Implementação de <code>_coerce_num</code> no <code>input</code>, convertendo números automaticamente.</li>
+      <li>Melhorias de interatividade e depuração.</li>
+    </ul>
+
+    ${pageNav('#/guia/exemplos', 'Exemplos de Código', '#/versao/v501', 'Versão 5.0.1')}
+  `
+},
+
+/* ───── VERSÃO 5.0.1 ───── */
+v501: {
+  title: '📋 Versão 5.0.1',
+  bc: '/ Versões / v5.0.1',
+  render: () => `
+    <h1>Enciclopédia Kaa (v5.0.1)</h1>
+    <blockquote>Simples. Tipada. Poderosa. C-Bound JIT.</blockquote>
+    <p>Introdução da arquitetura modular completa e consolidação do C-Bound JIT.</p>
+
+    <h2>Novidades da v5.0.1</h2>
+    <ul>
+      <li>Sistema de módulos na VM (<code>import/export</code>) e suporte a Python (<code>add -py</code>).</li>
+      <li>Suporte completo a arquivos bytecode <code>.kaac</code>.</li>
+      <li>VM baseada em Dispatch Table para alta velocidade.</li>
+    </ul>
+
+    ${pageNav('#/versao/v51', 'Versão 5.1', '#/versao/v48', 'Versão 4.8')}
   `
 },
 
@@ -1477,7 +1521,7 @@ v48: {
         </a>`).join('')}
     </div>
 
-    ${pageNav('#/guia/exemplos', 'Exemplos de Código', '#/versao/v47', 'Versão 4.7')}
+    ${pageNav('#/versao/v501', 'Versão 5.0.1', '#/versao/v47', 'Versão 4.7')}
   `
 },
 
@@ -1622,6 +1666,8 @@ const routeMap = {
   '/guia/origens':      'origens',
   '/guia/libs':         'libs',
   '/guia/exemplos':     'exemplos',
+  '/versao/v51':        'v51',
+  '/versao/v501':       'v501',
   '/versao/v48':        'v48',
   '/versao/v47':        'v47',
   '/versao/v46':        'v46',
