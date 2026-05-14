@@ -1000,6 +1000,14 @@
   <!-- OVERLAY -->
   <div id="overlay"></div>
 
+  <!-- MAINTENANCE MODAL -->
+  <div id="maintenance-modal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:var(--bg2); border:1px solid var(--accent); border-radius:var(--radius); padding:32px 24px; z-index:100; box-shadow:var(--shadow); text-align:center; max-width: 400px; width: 90%;">
+    <div style="font-size:2.5rem; margin-bottom:16px;">🚧</div>
+    <h3 style="color:var(--accent); margin:0 0 12px; font-family:var(--font-ui); font-size:1.4rem;">Em Manutenção</h3>
+    <p style="color:var(--text); margin-bottom:24px; font-size:0.95rem; line-height:1.6;">Os downloads estão temporariamente indisponíveis devido a manutenções no sistema. Voltaremos em breve!</p>
+    <button onclick="closeMaintenanceModal()" style="background:var(--accent); color:#0a1108; border:none; padding:10px 24px; border-radius:8px; font-weight:700; font-family:var(--font-ui); cursor:pointer; font-size:0.9rem; transition:all 0.2s;">Entendi</button>
+  </div>
+
   <!-- TOPBAR -->
   <header id="topbar">
     <div class="topbar-left">
@@ -1088,7 +1096,7 @@ download: {
         <h3>Kaa Installer</h3>
         <p>kaa-installer-linux-x86_64.tar.gz — Linux x86_64</p>
       </div>
-      <a class="dl-btn" href="downloads/kaa-installer-linux-x86_64.tar.gz" download>⬇ Baixar</a>
+      <a class="dl-btn" href="#" onclick="showMaintenanceModal(event)">⬇ Baixar</a>
     </div>
 
     <h2>🛠️ Como Instalar</h2>
@@ -1119,7 +1127,7 @@ download: {
         <h3>Kaa VS Code Extension</h3>
         <p>Realce de sintaxe · Auto-complete · Snippets</p>
       </div>
-      <a class="dl-btn dl-btn-sec" href="downloads/kaa-extension.vsix" download>⬇ Baixar VSIX</a>
+      <a class="dl-btn dl-btn-sec" href="#" onclick="showMaintenanceModal(event)">⬇ Baixar VSIX</a>
     </div>
 
     <p style="font-size:0.88rem;color:var(--text-muted)">No VS Code, vá em <code>Extensions</code> → <code>···</code> → <code>Install from VSIX</code>.</p>
@@ -1740,7 +1748,23 @@ menuBtn.addEventListener('click', () => {
 overlay.addEventListener('click', () => {
   sidebar.classList.remove('open');
   overlay.classList.remove('open');
+  document.getElementById('maintenance-modal').style.display = 'none';
 });
+
+// =================== MAINTENANCE MODAL ===================
+
+function showMaintenanceModal(e) {
+  e.preventDefault();
+  document.getElementById('maintenance-modal').style.display = 'block';
+  document.getElementById('overlay').classList.add('open');
+}
+
+function closeMaintenanceModal() {
+  document.getElementById('maintenance-modal').style.display = 'none';
+  if (!document.getElementById('sidebar').classList.contains('open')) {
+    document.getElementById('overlay').classList.remove('open');
+  }
+}
 
 // =================== SEARCH ===================
 
