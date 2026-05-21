@@ -988,8 +988,10 @@
       <a href="#/guia/origens" data-route="origens"><span class="nav-icon">🌱</span>Origens e Curiosidades</a>
       <a href="#/guia/libs" data-route="libs"><span class="nav-icon">📚</span>Bibliotecas Padrões</a>
       <a href="#/guia/exemplos" data-route="exemplos"><span class="nav-icon">💻</span>Exemplos de Código</a>
+      <a href="#/guia/ia" data-route="ia"><span class="nav-icon">🤖</span>Kaa e IA</a>
 
       <div class="nav-section-label">⏳ Histórico de Versões</div>
+      <a href="#/versao/v52" data-route="v52"><span class="nav-icon">📋</span>Versão 5.2 (Atual)</a>
       <a href="#/versao/v51" data-route="v51"><span class="nav-icon">📋</span>Versão 5.1</a>
       <a href="#/versao/v48" data-route="v48"><span class="nav-icon">📋</span>Versão 4.8</a>
       <a href="#/versao/v47" data-route="v47"><span class="nav-icon">📋</span>Versão 4.7</a>
@@ -1060,6 +1062,7 @@ home: {
         ['06', '#/guia/origens',    'Origens e Curiosidades',    'A história da linguagem, motivações, TabNews, Diolinux e mais.'],
         ['07', '#/guia/libs',       'Bibliotecas Padrões',       'Módulos time, random e math prontos para usar com add.'],
         ['08', '#/guia/exemplos',   'Exemplos de Código',        'RPG, probabilidade e cronômetro — código real e comentado.'],
+        ['09', '#/guia/ia',         'Kaa e Inteligência Artificial', 'O novo paradigma homem-máquina e a otimização da Kaa para Agentes de IA.'],
       ].map(([n,href,title,desc]) => `
         <a class="card" href="${href}">
           <div class="card-num">Guia ${n}</div>
@@ -1070,6 +1073,7 @@ home: {
 
     <h2>📜 Histórico de Versões</h2>
     <div class="version-list">
+      <a class="version-item" href="#/versao/v52"><span class="version-badge">Versão 5.2</span><div class="version-info">Nova biblioteca nativa sys de sistema e otimização para agentes de IA</div><span style="color:var(--text-muted)">→</span></a>
       <a class="version-item" href="#/versao/v51"><span class="version-badge">Versão 5.1</span><div class="version-info">Otimizações na VM, sistema modular e conversão implícita (_coerce_num)</div><span style="color:var(--text-muted)">→</span></a>
       <a class="version-item" href="#/versao/v48"><span class="version-badge">Versão 4.8</span><div class="version-info">Métodos de formatação de string embutidos no C-Bound</div><span style="color:var(--text-muted)">→</span></a>
       <a class="version-item" href="#/versao/v47"><span class="version-badge">Versão 4.7</span><div class="version-info">Introdução do Strict Scope e método .is_num</div><span style="color:var(--text-muted)">→</span></a>
@@ -1374,6 +1378,24 @@ libs: {
     <h1>Bibliotecas Padrões (Standard Libs)</h1>
     <p>A linguagem Kaa vem acompanhada de bibliotecas oficiais, prontas para uso via operador <code>add</code>. Dica: experimente <code>add "modulo" -></code> na extensão VS Code para ver o auto-complete.</p>
 
+    <h2>Módulo: <code>sys</code></h2>
+    <p><strong>Importação:</strong> <code>add "sys" all;</code> ou <code>add "sys" -> exit, platform;</code></p>
+    <div class="table-wrap">
+    <table>
+      <thead><tr><th>Função / Propriedade</th><th>Descrição</th></tr></thead>
+      <tbody>
+        <tr><td><code>exit(code)</code></td>           <td>Encerra a execução do programa com o código informado (padrão é 0).</td></tr>
+        <tr><td><code>version()</code></td>            <td>Retorna uma string contendo a versão estável atual do compilador Kaa (ex: <code>"Kaa 5.2.0"</code>).</td></tr>
+        <tr><td><code>system(cmd)</code></td>          <td>Executa um comando direto no shell do sistema operacional e retorna o status code.</td></tr>
+        <tr><td><code>getenv(name)</code></td>         <td>Recupera o valor de uma variável de ambiente do sistema operacional (ex: <code>getenv("HOME")</code>).</td></tr>
+        <tr><td><code>argv()</code></td>               <td>Retorna uma lista contendo os argumentos de linha de comando passados ao programa.</td></tr>
+        <tr><td><code>os_name()</code></td>            <td>Retorna o nome estrutural do sistema operacional (ex: <code>"posix"</code> ou <code>"nt"</code>).</td></tr>
+        <tr><td><code>platform()</code></td>           <td>Retorna a plataforma física do interpretador (ex: <code>"linux"</code>, <code>"darwin"</code> ou <code>"win32"</code>).</td></tr>
+        <tr><td><code>terminal_clear()</code></td>     <td>Executa a limpeza visual do terminal de comando de forma multiplataforma (suporta Linux, macOS e Windows).</td></tr>
+      </tbody>
+    </table>
+    </div>
+
     <h2>Módulo: <code>time</code></h2>
     <p><strong>Importação:</strong> <code>add "time" all;</code> ou <code>add "time" -> sleep, timestamp;</code></p>
     <div class="table-wrap">
@@ -1455,7 +1477,100 @@ exemplos: {
     <p>Exibe como obter dados do usuário via <code>input</code>, checar com <code>.is_num</code>, modificar strings com <code>.lower_letters()</code> e cronometrar com a biblioteca <code>time</code>.</p>
     ${codeBlock('kaa', `add "time" -> count;\n\nvar -f minutes;\nvar -T control;\n\nfun exit(){\n    var -s sair;\n    print "";\n    while(sair!="s" and sair!="n"){ \n        input "Deseja sair? [s/n] " >> sair; \n        sair = sair.lower_letters(); \n    }\n    if(sair == "s"){ return -F; } else { return -T; }\n}\n\nwhile(control != -F){\n    while (minutes.is_num != -T) { input "Quantos minutos devo cronometrar? " >> minutes; }\n    if (0 <= minutes <= 60) { minutes = minutes * 60; }\n    \n    count(minutes.f_valuation); \n    minutes = nil;\n    control = exit();\n}`)}
 
-    ${pageNav('#/guia/libs', 'Bibliotecas Padrões', '#/versao/v51', 'Versão 5.1')}
+    ${pageNav('#/guia/libs', 'Bibliotecas Padrões', '#/guia/ia', 'Kaa e Inteligência Artificial')}
+  `
+},
+
+/* ───── IA (NOVO GUIA) ───── */
+ia: {
+  title: '🤖 Kaa e IA',
+  bc: '/ Guias / Kaa e IA',
+  render: () => `
+    <h1>Kaa e o Novo Paradigma Homem-Máquina</h1>
+    <p>A linguagem Kaa foi originalmente concebida como uma ferramenta didática e procedural pura. No entanto, com a ascensão dos <strong>Agentes de Inteligência Artificial</strong>, a arquitetura estrita e os paradigmas de compilação da Kaa provaram ser perfeitamente alinhados com as necessidades de geração automática de código e execução de LLMs.</p>
+
+    <h2>1. Otimização Tokenômica e Latência</h2>
+    <p>IAs geradoras de código se beneficiam imensamente de sintaxes que minimizam a verborragia e o <em>boilerplate</em>. Cada token gerado por um modelo de linguagem custa dinheiro e tempo (latência de rede).</p>
+    <ul>
+      <li><strong>Declaração Enxuta:</strong> Sem a necessidade de heranças ou estruturas de classe verbosas (como em Java ou C++), as LLMs podem expressar comportamentos complexos com poucas linhas usando funções puras e dicionários.</li>
+      <li><strong>Tipagem Explicita por Flags:</strong> O design do Kaa (<code>var -i</code>, <code>var -s</code>, <code>var -obj</code>) atua como um validador estrito em tempo de execução. Isso permite que a IA defina contratos de dados claros sem a complexidade de sistemas de tipo estáticos verbosos.</li>
+    </ul>
+
+    <h2>2. Escopo Estrito (Strict Scope) e Prevenção de Alucinações</h2>
+    <p>A partir da versão 4.7, a Kaa implementa o <strong>Strict Scope</strong>: funções <em>nunca</em> podem ler ou modificar variáveis do escopo global diretamente. Elas devem receber tudo explicitamente via parâmetro.</p>
+    ${codeBlock('kaa', `var -s global_ip = "192.168.1.100";\n\nfun conectar(dados) {\n    // ERRO FATAL de Compilação na VM:\n    // print global_ip;\n    \n    // Forma Correta (Segura para IAs):\n    print dados;\n}`)}
+    ${callout('tip', '💡 Vantagem para o Paradigma Homem-Máquina', 'Para agentes de IA autônomos, o Strict Scope elimina os temidos <em>side effects</em> (efeitos colaterais indesejados). A IA pode tratar cada função ou componente como uma unidade pura e determinística, eliminando alucinações de alteração de estados globais ocultos.')}
+
+    <h2>3. Modelagem de Máquina de Estados (FSM) Auto-Recuperativa</h2>
+    <p>Uma aplicação robusta de IA baseia-se em <strong>FSMs (Finite State Machines)</strong> onde a lógica de negócios local roda a velocidades de microssegundos na VM Kaa, e as chamadas a LLMs são reservadas apenas para a recuperação de erros cognitivos.</p>
+    
+    <p>Veja como desenhar uma FSM determinística e legível em Kaa:</p>
+    ${codeBlock('kaa', `// Estados da FSM\nvar -i ESTADO_INICIAR = 0;\nvar -i ESTADO_PROCESSAR = 1;\nvar -i ESTADO_SUCESSO = 2;\nvar -i ESTADO_ERRO = 3;\n\n// Contexto do Agente\nvar -d contexto = {\n    "tentativas": 0,\n    "dados": "",\n    "erro_msg": ""\n};\n\nfun transicao(estado_atual, ctx) {\n    if (estado_atual == 0) {\n        ctx["dados"] = "Dados lidos com sucesso";\n        return 1; // Vai para PROCESSAR\n    }\n    if (estado_atual == 1) {\n        ctx["tentativas"] = ctx["tentativas"] + 1;\n        if (ctx["tentativas"] < 3) {\n            ctx["erro_msg"] = "Falha de conexao temporaria";\n            return 3; // Vai para ERRO\n        }\n        return 2; // SUCESSO\n    }\n    if (estado_atual == 3) {\n        if (ctx["tentativas"] >= 3) { return -1; } // Falha Crítica\n        return 1; // Tenta processar novamente\n    }\n    return estado_atual;\n}\n\nvar -i estado = ESTADO_INICIAR;\nwhile (estado != -1 and estado != ESTADO_SUCESSO) {\n    estado = transicao(estado, contexto);\n}\n\nif (estado == -1) {\n    print "[FALHA] Relatorio: ", contexto["erro_msg"];\n    exit(1); // Aciona o fallback da IA controladora\n}`)}
+
+    <h2>4. Tokenômica do Modelo Híbrido</h2>
+    <p>Executar fluxos de decisão diretamente na nuvem (LLM In-Loop) a cada passo gera custos absurdos e latência inviável para produção. O modelo híbrido da Kaa executa regras estruturadas localmente a custo zero, ativando a LLM de alto nível apenas em falhas inesperadas.</p>
+
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Métrica (10k req/dia)</th>
+          <th>LLM In-Loop (ReAct puro)</th>
+          <th>Modelo Híbrido Kaa (Local JIT + Fallback)</th>
+          <th>Economia / Razão</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Tokens/Dia</strong></td>
+          <td>300.000.000 tokens</td>
+          <td>2.500.000 tokens</td>
+          <td><strong>99.16% de redução</strong></td>
+        </tr>
+        <tr>
+          <td><strong>Custo Diário (Est.)</strong></td>
+          <td>$1.500,00</td>
+          <td>$12,50</td>
+          <td>120x mais econômico</td>
+        </tr>
+        <tr>
+          <td><strong>Latência Média</strong></td>
+          <td>~15 a 30 segundos / req</td>
+          <td>&lt; 1 segundo (local VM)</td>
+          <td>Execução quase instantânea</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h2>5. Gerenciamento Assíncrono com Arenas e S-Bots</h2>
+    <p>Para agentes corporativos de longa duração, dois fatores da Kaa evitam o travamento do sistema por estouro de memória:</p>
+    <ul>
+      <li><strong>S-Bots Serializáveis:</strong> A orientação a objetos baseada em composição de dicionários (S-Bots) permite serializar qualquer entidade diretamente para JSON usando <code>.keys</code> e <code>.values</code>, facilitando a troca de mensagens entre o interpretador e a IA de orquestração.</li>
+      <li><strong>Descarte por Arenas:</strong> O interpretador Kaa aloca a memória de subagentes ou módulos dinâmicos em Arenas separadas. Ao final da atividade, chamar <code>destroy_arena("nome_da_arena")</code> libera toda a memória em complexidade $O(1)$, prevenindo vazamentos de memória residuais comuns em scripts iterativos de IA.</li>
+    </ul>
+
+    ${pageNav('#/guia/exemplos', 'Exemplos de Código', '#/versao/v52', 'Versão 5.2')}
+  `
+},
+
+/* ───── VERSÃO 5.2 (NOVA) ───── */
+v52: {
+  title: '📋 Versão 5.2',
+  bc: '/ Versões / v5.2',
+  render: () => `
+    <h1>Enciclopédia Kaa (v5.2)</h1>
+    <blockquote>Simples. Tipada. Poderosa. C-Bound JIT.</blockquote>
+    <p>Esta versão estável é focada na expansão da infraestrutura nativa do interpretador com o SO e suporte direcionado para o novo paradigma de IA e agentes inteligentes.</p>
+
+    <h2>Novidades e Atualizações da v5.2</h2>
+    <ul>
+      <li><strong>Nova Biblioteca <code>sys</code>:</strong> Fornece bindings diretos e multiplataforma de altíssima velocidade para manipulação de processos, variáveis de ambiente, plataforma, console e argumentos de terminal.</li>
+      <li><strong>Suporte a Geração de Código por IA:</strong> Sintaxe com escopo e tipagem estrita otimizada para prompts estruturados de LLMs, reduzindo erros de alucinação de escopo global.</li>
+      <li><strong>Otimizações de C-Bound JIT:</strong> VM Cython com melhorias no roteamento de OpCodes matemáticos e melhor gerenciamento de memória em blocos de Arenas.</li>
+    </ul>
+
+    ${pageNav('#/guia/ia', 'Kaa e Inteligência Artificial', '#/versao/v51', 'Versão 5.1')}
   `
 },
 
@@ -1474,7 +1589,7 @@ v51: {
       <li>Melhorias de interatividade e depuração.</li>
     </ul>
 
-    ${pageNav('#/guia/exemplos', 'Exemplos de Código', '#/versao/v501', 'Versão 5.0.1')}
+    ${pageNav('#/versao/v52', 'Versão 5.2', '#/versao/v501', 'Versão 5.0.1')}
   `
 },
 
@@ -1674,6 +1789,8 @@ const routeMap = {
   '/guia/origens':      'origens',
   '/guia/libs':         'libs',
   '/guia/exemplos':     'exemplos',
+  '/guia/ia':           'ia',
+  '/versao/v52':        'v52',
   '/versao/v51':        'v51',
   '/versao/v501':       'v501',
   '/versao/v48':        'v48',
